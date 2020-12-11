@@ -1,0 +1,64 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <div class="d-flex flex-row justify-content-between">
+                            <h4 class="card-title p-2">Usuarios</h4>
+                            <button mat-raised-button type="submit" (click)="newUser()" class="btn">Agregar</button>
+                        </div>  
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <mat-form-field>
+                                <input id="myInput" class="card-title " matInput  placeholder="Buscar" (keyup)="filter($event)" type="text">
+                            </mat-form-field>
+                            <table id="myTable" class="table">
+                                <thead class=" text-primary">
+                                    <th>
+                                        Nombre
+                                    </th>
+                                    <th>
+                                        Correo
+                                    </th>
+                                    <th>
+                                        Rol    
+                                    </th>
+                                    <th>
+                                        Teléfono
+                                    </th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of users">
+                                        <td>
+                                            {{user?.name}} {{user?.lastName_1}} {{user?.lastName_2}}
+                                        </td>
+                                        <td>
+                                            {{user?.email}}
+                                        </td>
+                                        <td>
+                                            {{user?.role?.role}}
+                                        </td>
+                                        <td class="text-primary">
+                                            {{user?.telephone}}
+                                        </td>
+                                        <td>
+                                            <button mat-raised-button type="button" (click)="editUser(user?.id)" matTooltip="Editar usuario" [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+                                            <button mat-raised-button type="button"  (click)="removeUser(user?.id)" matTooltip="Eliminar usuario" [matTooltipPosition]="'above'" class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </td>
+                                    </tr>                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

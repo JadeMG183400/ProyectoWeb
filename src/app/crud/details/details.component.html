@@ -1,0 +1,116 @@
+<div class="wrapper">
+    <div class="main-panel">
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header card-header-danger">
+                                <h4 *ngIf="idUser" class="card-title">Editar Usuario</h4>
+                                <h4 *ngIf="!idUser" class="card-title">Añadir usuario</h4>
+                                <p *ngIf="!idUser" class="card-category">Completa el perfil</p>
+                            </div>
+                            <div class="card-body">
+                                <form [formGroup]="formUser">
+                                    <div class="row">
+                                        <div class="col">
+                                            <mat-form-field class="example-full-width">
+                                              <input matInput placeholder="Nombre de usuario" formControlName="username" required>
+                                              <mat-error *ngIf="f.username.touched && f.username.hasError('required')">Campo requerido</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col">
+                                            <mat-form-field class="example-full-width">
+                                              <input matInput placeholder="Teléfono" type="number" formControlName="telephone" required>
+                                              <mat-error *ngIf="f.telephone.touched && f.telephone.hasError('required')">Campo requerido</mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                          <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Nombre(s)" type="text" formControlName="name" required>
+                                            <mat-error *ngIf="f.name.touched && f.name.hasError('required')">Campo requerido</mat-error>
+                                          </mat-form-field>
+                                        </div>
+                                        <div class="col">
+                                          <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Apellido paterno" type="text" formControlName="lastName_1" required>
+                                            <mat-error *ngIf="f.lastName_1.touched && f.username.hasError('required')">Campo requerido</mat-error>
+                                          </mat-form-field>
+                                        </div>
+                                        <div class="col">
+                                          <mat-form-field class="example-full-width">
+                                            <input matInput placeholder="Apellido materno" type="text" formControlName="lastName_2" required>
+                                            <mat-error *ngIf="f.lastName_2.touched && f.lastName_2.hasError('required')">Campo requerido</mat-error>
+                                          </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <mat-form-field class="example-full-width">
+                                              <input matInput placeholder="Correo Electrónico" type="email" formControlName="email" required>
+                                              <mat-error *ngIf="f.email.hasError('required') && f.email.touched">Campo requerido</mat-error>
+                                              <mat-error *ngIf="f.email.hasError('email') && f.email.dirty">Ingrese un correo válido</mat-error>
+                                            </mat-form-field>
+                                          </div>
+                                    </div>
+                                    <div class="row" *ngIf="!idUser">
+                                      <div class="col">
+                                        <mat-form-field class="example-full-width">
+                                          <input matInput placeholder="Contraseña" required type="password" formControlName="password">
+                                          <mat-error *ngIf="f.password.touched && f.password.hasError('required')">Campo requerido</mat-error>
+                                          <mat-error *ngIf="f.password.dirty && f.password.hasError('minlength')">La contraseña debe tener al menos 6 carácteres</mat-error>
+                                        </mat-form-field>
+                                      </div>
+                                      <div class="col">
+                                        <mat-form-field class="example-full-width">
+                                          <mat-label>Repetir contraseña</mat-label>
+                                          <input type="password" formControlName="confirmedPassword" matInput placeholder="Repetir Contraseña" 
+                                          required autocomplete="off">
+                                          <mat-error *ngIf="f.confirmedPassword.touched && f.confirmedPassword.hasError('required')">Campo requerido</mat-error>
+                                          <mat-error *ngIf="f.confirmedPassword.hasError('mismatch') && f.confirmedPassword.dirty" >Las contraseñas no coinciden</mat-error>
+                                        </mat-form-field>
+                                      </div>
+                                    </div>
+                                    <button mat-raised-button type="submit"   *ngIf="idUser" class="btn btn-danger pull-right" (click)="editUser()">Actualizar usuario</button>
+                                    <button mat-raised-button type="submit" [disabled]="formUser.invalid || formUser.pristine && f.password.value !== f.confirmedPassword.value && f.confirmedPassword.dirty"*ngIf="!idUser" class="btn btn-danger pull-right" (click)="saveUser()">Guardar usuario</button>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-profile">
+                            <div class="card-avatar">
+                              <div align="center" class="container-picture">
+                                <img class="profile-picture image" [src]="formUser?.get('imageProfile').value">
+                              </div>
+                              <span class="picture">
+                                <input id="picture" accept="image/*" name="picture" hidden type=file (change)="selectFile($event)">
+                              </span>
+                            </div>
+                            <div class="card-body">
+                              <h4 class="card-title">{{formUser?.get('name').value}} {{formUser?.get('lastName_1').value}} {{formUser?.get('lastName_2').value}}</h4>
+                              <h6 class="card-category text-gray">{{formUser?.get('username').value}}</h6>
+                              <h6 class="card-category text-gray">{{formUser?.get('telephone').value}}</h6>
+                                <!-- 
+                                
+                                <p class="card-description">
+                                    Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                                </p> -->
+                                <label for="picture" class="btn btn-danger btn-round">Cargar imagen</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </div>
+</div>
+
+
+
+
+  
+  

@@ -1,1 +1,32 @@
-<p>login works!</p>
+<div class="container">
+    <div class="row linea">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header card-header-danger">
+                    <h4  class="card-title simple-text text-center">Ingresa tus credenciales de acceso</h4>
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="formLogin">
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput formControlName="email" placeholder="Correo electronico" type="text">
+                                </mat-form-field>
+                            </div>
+                        </div>  
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput formControlName="password" placeholder="Contraseña" type="password">
+                                </mat-form-field>
+                            </div>                                
+                        </div>                                                                       
+                        <button mat-raised-button type="submit" (click)="login()" class="btn btn-danger btn-block">Iniciar sesion</button>                            
+                        <button mat-raised-button type="submit" (click)="gmail()" class="btn btn-danger btn-block">Iniciar sesión con Gmail</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
